@@ -1,0 +1,95 @@
+{
+    "_id": "55ee5e44b6590e1c5d1b9393",
+    "about": "Magna ipsum duis adipisicing et exercitation duis et nostrud do. Commodo excepteur anim officia est. Laboris deserunt est voluptate qui dolor Lorem nisi enim nulla laboris esse irure enim. Aliquip qui veniam minim elit consequat consectetur nulla. Mollit id non consectetur nostrud mollit. Et ea velit adipisicing ex labore officia reprehenderit quis duis nulla consectetur ullamco. Eiusmod ipsum nulla est sit minim mollit ea nulla quis consectetur labore excepteur.\r\n",
+    "address": "829 Harwood Place, Southmont, Arizona, 8147",
+    "age": 35,
+    "balance": "$75,073.25",
+    "company": "ECLIPSENT",
+    "docFormat": "json",
+    "email": "vangschultz@eclipsent.com",
+    "eyeColor": "green",
+    "favoriteFruit": "pear",
+    "friends": [
+        {
+            "id": 0,
+            "name": "Buck Rutledge"
+        },
+        {
+            "id": 1,
+            "name": "Lilian Mccall"
+        },
+        {
+            "id": 2,
+            "name": "Garcia Jacobs"
+        }
+    ],
+    "gender": "male",
+    "greeting": "Hello, Vang Schultz! You have 6 unread messages.",
+    "guid": "db34ca9f-5989-4f87-913f-5c7f950593c3",
+    "index": 0,
+    "isActive": true,
+    "location": {
+        "latitude": 32.796459,
+        "longitude": -128.859252
+    },
+    "name": "Vang Schultz",
+    "phone": "+1 (816) 459-2744",
+    "picture": "http://placehold.it/32x32",
+    "registered": "2015-07-30T08:34:57 -07:00",
+    "tags": [
+        "dolor",
+        "do",
+        "pariatur",
+        "do",
+        "ullamco",
+        "ad",
+        "ea"
+    ],
+    "triples": [
+        {
+            "triple": {
+                "object": {
+                    "datatype": "http://www.w3.org/2001/XMLSchema#string",
+                    "value": "knows"
+                },
+                "predicate": "http://www.w3.org/2000/01/rdf-schema#label",
+                "subject": "http://xmlns.com/foaf/0.1/knows"
+            }
+        },
+        {
+            "triple": {
+                "object": "Vang Schultz",
+                "predicate": "http://www.w3.org/2000/01/rdf-schema#label",
+                "subject": "/sample-data/data-0.json"
+            }
+        },
+        {
+            "triple": {
+                "object": "http://xmlns.com/foaf/0.1/Person",
+                "predicate": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+                "subject": "/sample-data/data-0.json"
+            }
+        },
+        {
+            "triple": {
+                "object": "/sample-data/data-2782.json",
+                "predicate": "http://xmlns.com/foaf/0.1/knows",
+                "subject": "/sample-data/data-0.json"
+            }
+        },
+        {
+            "triple": {
+                "object": "/sample-data/data-1241.json",
+                "predicate": "http://xmlns.com/foaf/0.1/knows",
+                "subject": "/sample-data/data-0.json"
+            }
+        },
+        {
+            "triple": {
+                "object": "/sample-data/data-1989.json",
+                "predicate": "http://xmlns.com/foaf/0.1/knows",
+                "subject": "/sample-data/data-0.json"
+            }
+        }
+    ]
+}

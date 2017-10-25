@@ -1,0 +1,13 @@
+import
+
+-input_file_path
+data/ea
+
+-output_collections
+data,data/people,ea,instance
+
+-output_permissions
+${app-role},read,${app-role},update
+
+-output_uri_replace
+".*/,''"

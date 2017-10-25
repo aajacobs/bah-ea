@@ -1,0 +1,85 @@
+{
+    "_id": "55ee5e44f77dd7dab6656cdf",
+    "about": "Est minim consectetur ullamco ipsum. Veniam veniam sit qui exercitation incididunt nostrud ea esse dolore voluptate nisi. Qui anim fugiat occaecat eu minim laborum.\r\n",
+    "address": "731 Brightwater Court, Fontanelle, Missouri, 6921",
+    "age": 69,
+    "balance": "$22,002.95",
+    "company": "STREZZO",
+    "docFormat": "json",
+    "email": "mathewsmccray@strezzo.com",
+    "eyeColor": "green",
+    "favoriteFruit": "apple",
+    "friends": [
+        {
+            "id": 0,
+            "name": "Roxie Stout"
+        },
+        {
+            "id": 1,
+            "name": "Victoria Burnett"
+        },
+        {
+            "id": 2,
+            "name": "Lora Glenn"
+        }
+    ],
+    "gender": "male",
+    "greeting": "Hello, Mathews Mccray! You have 1 unread messages.",
+    "guid": "c7511a55-afb3-4476-8dd9-43c3d96fb55f",
+    "index": 1,
+    "isActive": false,
+    "location": {
+        "latitude": 22.580852,
+        "longitude": 162.44889
+    },
+    "name": "Mathews Mccray",
+    "phone": "+1 (991) 531-2420",
+    "picture": "http://placehold.it/32x32",
+    "registered": "2015-05-14T02:28:53 -07:00",
+    "tags": [
+        "sunt",
+        "ad",
+        "et",
+        "mollit",
+        "culpa",
+        "voluptate",
+        "eiusmod"
+    ],
+    "triples": [
+        {
+            "triple": {
+                "object": "Mathews Mccray",
+                "predicate": "http://www.w3.org/2000/01/rdf-schema#label",
+                "subject": "/sample-data/data-1.json"
+            }
+        },
+        {
+            "triple": {
+                "object": "http://xmlns.com/foaf/0.1/Person",
+                "predicate": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+                "subject": "/sample-data/data-1.json"
+            }
+        },
+        {
+            "triple": {
+                "object": "/sample-data/data-973.json",
+                "predicate": "http://xmlns.com/foaf/0.1/knows",
+                "subject": "/sample-data/data-1.json"
+            }
+        },
+        {
+            "triple": {
+                "object": "/sample-data/data-435.json",
+                "predicate": "http://xmlns.com/foaf/0.1/knows",
+                "subject": "/sample-data/data-1.json"
+            }
+        },
+        {
+            "triple": {
+                "object": "/sample-data/data-173.json",
+                "predicate": "http://xmlns.com/foaf/0.1/knows",
+                "subject": "/sample-data/data-1.json"
+            }
+        }
+    ]
+}

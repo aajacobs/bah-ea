@@ -1,0 +1,9 @@
+{
+  "name": "bah-ea",
+  "version": "0.0.0",
+  "description": "Sample app generated with slush-marklogic-node",
+  "private": true,
+  "dependencies": {
+    "visjs-graph": "2.1.*"
+  }
+}

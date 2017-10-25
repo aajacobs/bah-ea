@@ -1,0 +1,293 @@
+# baseURI: http://lab.bah.com/ontologies/enterprisearchitecture/ea.owl
+# imports: http://purl.org/dc/elements/1.1/
+# imports: http://purl.org/dc/terms/
+# imports: http://topbraid.org/schema/schema-single-range
+# imports: http://www.w3.org/2003/01/geo/wgs84_pos
+# imports: http://www.w3.org/2004/02/skos/core
+# prefix: ea
+
+@prefix ea: <http://lab.bah.com/ontologies/enterprisearchitecture/ea.owl#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://lab.bah.com/ontologies/enterprisearchitecture/ea.owl#>
+  rdf:type owl:Ontology ;
+  owl:imports <http://purl.org/dc/elements/1.1/> ;
+  owl:imports <http://purl.org/dc/terms/> ;
+  owl:imports <http://topbraid.org/schema/schema-single-range> ;
+  owl:imports <http://www.w3.org/2003/01/geo/wgs84_pos> ;
+  owl:imports <http://www.w3.org/2004/02/skos/core> ;
+  owl:versionInfo "1.0" ;
+.
+ea:Application
+  rdf:type owl:Class ;
+  rdfs:label "Application" ;
+  rdfs:subClassOf owl:Thing ;
+.
+ea:ArchitecturalView
+  rdf:type owl:Class ;
+  rdfs:label "Architectural view" ;
+  rdfs:subClassOf owl:Thing ;
+.
+ea:BusinessArea
+  rdf:type owl:Class ;
+  rdfs:label "Business Area" ;
+  rdfs:subClassOf owl:Thing ;
+.
+ea:BusinessCapability
+  rdf:type owl:Class ;
+  rdfs:label "Business capability" ;
+  rdfs:subClassOf owl:Thing ;
+.
+ea:BusinessProcess
+  rdf:type owl:Class ;
+  rdfs:label "Business Process" ;
+  rdfs:subClassOf owl:Thing ;
+.
+ea:CommonServices
+  rdf:type owl:Class ;
+  rdfs:label "Common services" ;
+  rdfs:subClassOf owl:Thing ;
+.
+ea:CurrentArchitecturalView
+  rdf:type ea:ArchitecturalView ;
+  rdfs:label "Current architectural view" ;
+.
+ea:Datastore
+  rdf:type owl:Class ;
+  rdfs:label "Datastore" ;
+  rdfs:subClassOf owl:Thing ;
+.
+ea:DatastoreOther
+  rdf:type owl:Class ;
+  rdfs:label "Datastore" ;
+  rdfs:subClassOf owl:Thing ;
+.
+ea:DesignPattern
+  rdf:type owl:Class ;
+  rdfs:label "Design pattern" ;
+  rdfs:subClassOf owl:Thing ;
+.
+ea:FutureTechnology
+  rdf:type ea:Technology ;
+  rdfs:label "Future technology" ;
+.
+ea:OperatingSystem
+  rdf:type owl:Class ;
+  rdfs:label "Operating system" ;
+  rdfs:subClassOf owl:Thing ;
+.
+ea:Organization
+  rdf:type owl:Class ;
+  rdfs:label "Organization" ;
+  rdfs:subClassOf owl:Thing ;
+.
+ea:ProgrammingLanguage
+  rdf:type owl:Class ;
+  rdfs:label "Programming Language" ;
+  rdfs:subClassOf owl:Thing ;
+.
+ea:Project
+  rdf:type owl:Class ;
+  rdfs:label "Project" ;
+  rdfs:subClassOf owl:Thing ;
+.
+ea:ReceivingApplication
+  rdf:type ea:Application ;
+  rdfs:label "Receiving application" ;
+.
+ea:RoadMapArchitecturalView
+  rdf:type ea:ArchitecturalView ;
+  rdfs:label "Road map architectural view" ;
+.
+ea:SendingApplication
+  rdf:type ea:Application ;
+  rdfs:label "Sending application" ;
+.
+ea:Server
+  rdf:type owl:Class ;
+  rdfs:label "Server" ;
+  rdfs:subClassOf owl:Thing ;
+.
+ea:TargetArchitecturalView
+  rdf:type ea:ArchitecturalView ;
+  rdfs:label "Target architectural view" ;
+.
+ea:Technology
+  rdf:type owl:Class ;
+  rdfs:label "Technology" ;
+  rdfs:subClassOf owl:Thing ;
+.
+ea:TransitionArchitecturalView
+  rdf:type ea:ArchitecturalView ;
+  rdfs:label "Transition architectural view" ;
+.
+ea:belongsTo
+  rdf:type owl:ObjectProperty ;
+  rdfs:domain ea:Application ;
+  rdfs:label "belongs to" ;
+  rdfs:range ea:BusinessArea ;
+.
+ea:hostedOn
+  rdf:type owl:ObjectProperty ;
+  rdfs:domain ea:Application ;
+  rdfs:label "hosted on" ;
+  rdfs:range ea:Server ;
+.
+ea:leverages
+  rdf:type owl:ObjectProperty ;
+  rdfs:domain ea:Application ;
+  rdfs:label "leverages" ;
+  rdfs:range ea:CommonServices ;
+.
+ea:owns
+  rdf:type owl:ObjectProperty ;
+  rdfs:domain ea:Organization ;
+  rdfs:label "owns" ;
+  rdfs:range ea:Application ;
+.
+ea:programmedIn
+  rdf:type owl:ObjectProperty ;
+  rdfs:domain ea:Application ;
+  rdfs:label "programmed in" ;
+  rdfs:range ea:ProgrammingLanguage ;
+.
+ea:receivesDataFrom
+  rdf:type owl:TransitiveProperty ;
+  rdfs:domain ea:Application ;
+  rdfs:label "receives data from" ;
+  rdfs:range ea:Application ;
+  owl:inverseOf ea:sendsDataTo ;
+.
+ea:savesDataIn
+  rdf:type owl:ObjectProperty ;
+  rdfs:domain ea:Application ;
+  rdfs:label "saves data in" ;
+  rdfs:range ea:Datastore ;
+.
+ea:sendsDataTo
+  rdf:type owl:TransitiveProperty ;
+  rdfs:domain ea:Application ;
+  rdfs:label "sends data to" ;
+  rdfs:range ea:Application ;
+  owl:inverseOf ea:receivesDataFrom ;
+.
+ea:supports
+  rdf:type owl:ObjectProperty ;
+  rdfs:domain ea:Application ;
+  rdfs:domain ea:ArchitecturalView ;
+  rdfs:label "supports" ;
+  rdfs:range ea:BusinessArea ;
+  rdfs:range ea:BusinessCapability ;
+  rdfs:range ea:BusinessProcess ;
+.
+ea:utilizes
+  rdf:type owl:ObjectProperty ;
+  rdfs:domain ea:Application ;
+  rdfs:label "utilizes" ;
+  rdfs:range ea:OperatingSystem ;
+.
+ea:willBeImpactedBy
+  rdf:type owl:ObjectProperty ;
+  rdfs:domain ea:Application ;
+  rdfs:label "will be impacted by" ;
+  rdfs:range ea:Technology ;
+.
+ea:willBeUsing
+  rdf:type owl:ObjectProperty ;
+  rdfs:domain ea:ArchitecturalView ;
+  rdfs:label "will be using" ;
+  rdfs:range ea:Technology ;
+.
+ea:Cobol
+  a ea:ProgrammingLanguage ;
+.
+ea:Audits
+  a ea:BusinessCapability ;
+.
+ea:FilingApplication.pptx.xml
+  a ea:Application ;
+  ea:savesDataIn ea:MarkLogic ;
+  ea:isProgrammedIn ea:Cobol ;
+  ea:supports ea:Audits ;
+  rdfs:label "Filing Application" ;
+  ea:belongsTo ea:ITS ;
+  ea:belongsTo: ea:Intake ;
+  ea:supports ea:BP2.1SubmissionProcessing ;  
+.
+ea:Oracle
+  a ea:Datastore ;
+.
+ea:MarkLogic
+  a ea:Datastore ;
+.
+ea:ITS
+  a ea:BusinessArea ; 
+  rdfs:label "IT Services" ;
+  ea:utilizes ea:FilingApplication ;
+.
+ea:ModernizedEFile.pptx.xml
+  a ea:Application ;
+  rdfs:label "Modernized E-File" ;
+  ea:belongsTo: ea:Intake ;
+  ea:hostedOn: ea:MeFServer ;
+  ea:isPartOf: ea:CurrentArchitecturalView ;
+  ea:isPartOf: ea:RoadMapArchitecturalView ;
+  ea:isPartOf: ea:TargetArchitecturalView ;
+  ea:leverages: ea:CommonServicesA ;
+  ea:programmedIn: ea:MeFProgrammingLanguage ;
+  ea:receivesDataFrom: ea:ApplicationY ;
+  ea:savesDataIn: ea:MeFDatastore ; 
+  ea:sendsDataTo: ea:ApplicationZ ;
+  ea:supports: ea:Intake ;
+  ea:supports: ea:1.0SubmissionReceiptandPreparation ;
+  ea:supports: ea:BP1.2PreSubmissionProcessing ;
+  ea:utilizes ea:MeFOperatingSystem ;
+  ea:willBeImpactedBy: ea:MeFTechnology ;
+.
+ea:1.0SubmissionReceiptandPreparation
+  a ea:BusinessCapability  ;
+  rdfs:label "1.0 Submission Receiptand Preparation" ;
+.
+ea:ApplicationY
+  a ea:Application ;
+  rdfs:label "Application Y" ;
+.
+ea:ApplicationZ
+  a ea:Application ;
+  rdfs:label "Application Z" ;
+.
+ea:BP1.2PreSubmissionProcessing
+  a ea:BusinessProcess;
+  rdfs:label "BP 1.2 Pre-Submission Processing" ;
+.
+ea:CommonServicesA
+  a ea:CommonServices;
+  rdfs:label "Common Services A" ;
+.
+ea:Intake
+  a ea:BusinessArea ;
+  rdfs:label "Intake" ;
+.
+ea:MeFDatastore
+  a ea:Datastore ;
+  rdfs:label "MeF Datastore" ;
+.
+ea:MeFOperatingSystem
+  a ea:OperatingSystem ;
+  rdfs:label "MeF Operating System" ;
+.
+ea:MeFProgrammingLanguage
+  a ea:ProgrammingLanguage ;
+  rdfs:label "MeF Programming Language" ;
+.
+ea:MeFTechnology
+  a ea:Technology ;
+  rdfs:label "MeF Techonology" ;
+.
+ea:MeFServer
+  a ea:Server ;
+  rdfs:label "MeF Server" ;
+.
