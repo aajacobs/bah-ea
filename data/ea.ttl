@@ -162,13 +162,13 @@ ea:receivesDataFrom
   owl:inverseOf ea:sendsDataTo ;
 .
 ea:savesDataIn
-  rdf:type owl:ObjectProperty ;
+  rdf:type owl:owl:inverseOf ;
   rdfs:domain ea:Application ;
   rdfs:label "saves data in" ;
   rdfs:range ea:Datastore ;
 .
 ea:sendsDataTo
-  rdf:type owl:TransitiveProperty ;
+  rdf:type owl:inverseOf ;
   rdfs:domain ea:Application ;
   rdfs:label "sends data to" ;
   rdfs:range ea:Application ;
@@ -182,9 +182,21 @@ ea:supports
   rdfs:range ea:BusinessArea ;
   rdfs:range ea:BusinessCapability ;
   rdfs:range ea:BusinessProcess ;
+  owl:inverseOf ea:supportedBy ;  
+  a rdf:Property ;
+.
+ea:supportedBy
+  rdf:type owl:ObjectProperty ;
+  rdfs:label "is supported by" ;
+  rdfs:domain ea:BusinessArea ;
+  rdfs:domain ea:BusinessCapability ;
+  rdfs:domain ea:BusinessProcess ;
+  rdfs:range ea:Application ;
+  rdfs:range ea:ArchitecturalView ;  
+  a rdf:Property ;  
 .
 ea:utilizes
-  rdf:type owl:ObjectProperty ;
+  rdf:type owl:ObjectProperty ;  
   rdfs:domain ea:Application ;
   rdfs:label "utilizes" ;
   rdfs:range ea:OperatingSystem ;
@@ -233,6 +245,7 @@ ea:ModernizedEFile.pptx.xml
   rdfs:label "Modernized E-File" ;
   ea:belongsTo: ea:Intake ;
   ea:hostedOn: ea:MeFServer ;
+  ea:isOwnedBy: ea:MeFOwningOrganization ;
   ea:isPartOf: ea:CurrentArchitecturalView ;
   ea:isPartOf: ea:RoadMapArchitecturalView ;
   ea:isPartOf: ea:TargetArchitecturalView ;
@@ -241,7 +254,6 @@ ea:ModernizedEFile.pptx.xml
   ea:receivesDataFrom: ea:ApplicationY ;
   ea:savesDataIn: ea:MeFDatastore ; 
   ea:sendsDataTo: ea:ApplicationZ ;
-  ea:supports: ea:Intake ;
   ea:supports: ea:1.0SubmissionReceiptandPreparation ;
   ea:supports: ea:BP1.2PreSubmissionProcessing ;
   ea:utilizes ea:MeFOperatingSystem ;
@@ -260,7 +272,7 @@ ea:ApplicationZ
   rdfs:label "Application Z" ;
 .
 ea:BP1.2PreSubmissionProcessing
-  a ea:BusinessProcess;
+  a ea:BusinessProcess ;
   rdfs:label "BP 1.2 Pre-Submission Processing" ;
 .
 ea:CommonServicesA
@@ -268,8 +280,9 @@ ea:CommonServicesA
   rdfs:label "Common Services A" ;
 .
 ea:Intake
-  a ea:BusinessArea ;
+a ea:BusinessArea ;
   rdfs:label "Intake" ;
+  ea:isSupportedBy: ea:ModernizedEFile.pptx.xml ;
 .
 ea:MeFDatastore
   a ea:Datastore ;
@@ -290,4 +303,8 @@ ea:MeFTechnology
 ea:MeFServer
   a ea:Server ;
   rdfs:label "MeF Server" ;
+.
+ea:MeFOwningOrganization
+  a ea:Organization ;
+  rdfs:label "MeF Owning Organization" ;
 .
