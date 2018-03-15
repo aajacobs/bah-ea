@@ -38,7 +38,12 @@ ea:BusinessArea
 .
 ea:BusinessCapability
   rdf:type owl:Class ;
-  rdfs:label "Business capability" ;
+  rdfs:label "Business Capability" ;
+  rdfs:subClassOf owl:Thing ;
+.
+ea:BusinessService
+  rdf:type owl:Class ;
+  rdfs:label "Business Service" ;
   rdfs:subClassOf owl:Thing ;
 .
 ea:BusinessProcess
@@ -74,6 +79,11 @@ ea:FutureTechnology
   rdf:type ea:Technology ;
   rdfs:label "Future technology" ;
 .
+ea:InvestDomain
+  rdf:type owl:Class ;
+  rdfs:label "Invest Domain" ;
+  rdfs:subClassOf owl:Thing ;
+.
 ea:OperatingSystem
   rdf:type owl:Class ;
   rdfs:label "Operating system" ;
@@ -97,6 +107,11 @@ ea:Project
 ea:ReceivingApplication
   rdf:type ea:Application ;
   rdfs:label "Receiving application" ;
+.
+ea:Document 
+  rdf:type owl:Class ;
+  rdfs:label "Document" ;
+  rdfs:subClassOf owl:Thing ;
 .
 ea:RoadMapArchitecturalView
   rdf:type ea:ArchitecturalView ;
@@ -127,8 +142,10 @@ ea:TransitionArchitecturalView
 ea:belongsTo
   rdf:type owl:ObjectProperty ;
   rdfs:domain ea:Application ;
+  rdfs:domain ea:BusinessProcess ;
   rdfs:label "belongs to" ;
   rdfs:range ea:BusinessArea ;
+  rdfs:range ea:InvestDomain ;
 .
 ea:hostedOn
   rdf:type owl:ObjectProperty ;
@@ -153,6 +170,11 @@ ea:programmedIn
   rdfs:domain ea:Application ;
   rdfs:label "programmed in" ;
   rdfs:range ea:ProgrammingLanguage ;
+.
+ea:relatedTo
+  rdf:type owl:ObjectProperty ;
+  rdfs:label "related to" ;
+  rdfs:range ea:Document ;
 .
 ea:receivesDataFrom
   rdf:type owl:TransitiveProperty ;
@@ -185,6 +207,10 @@ ea:supports
   owl:inverseOf ea:supportedBy ;  
   a rdf:Property ;
 .
+ea:hasDocument
+  rdf:type owl:ObjectProperty ;
+  rdfs:label "has document" ;
+.
 ea:supportedBy
   rdf:type owl:ObjectProperty ;
   rdfs:label "is supported by" ;
@@ -194,6 +220,12 @@ ea:supportedBy
   rdfs:range ea:Application ;
   rdfs:range ea:ArchitecturalView ;  
   a rdf:Property ;  
+.
+ea:tracesTo
+  rdf:type owl:ObjectProperty ;
+  rdfs:label "traces to Business Services" ;
+  rdfs:domain ea:BusinessArea ;
+  rdf:range ea:BusinessService ;
 .
 ea:utilizes
   rdf:type owl:ObjectProperty ;  
@@ -219,7 +251,7 @@ ea:Cobol
 ea:Audits
   a ea:BusinessCapability ;
 .
-ea:FilingApplication.pptx.xml
+ea:FilingApplication
   a ea:Application ;
   ea:savesDataIn ea:MarkLogic ;
   ea:isProgrammedIn ea:Cobol ;
@@ -229,10 +261,17 @@ ea:FilingApplication.pptx.xml
   ea:belongsTo: ea:Intake ;
   ea:supports ea:BP2.1SubmissionProcessing ;  
 .
-ea:Oracle
-  a ea:Datastore ;
+ea:BP2.1SubmissionProcessing
+  a ea:BusinessProcess ;
+  rdfs:label "BP 2.1 Submission Processing" ;
+.  
+ea:SubmissionProcessing
+  a ea:InvestDomain ;
+  rdfs:label "Submission Processing" ;
+  ea:belongsTo ea:BP1.2PreSubmissionProcessing ;
 .
 ea:MarkLogic
+  rdfs:label "MarkLogic" ;
   a ea:Datastore ;
 .
 ea:ITS
@@ -240,28 +279,51 @@ ea:ITS
   rdfs:label "IT Services" ;
   ea:utilizes ea:FilingApplication ;
 .
-ea:ModernizedEFile.pptx.xml
+ea:GeneralizedMainlineFramework
   a ea:Application ;
-  rdfs:label "Modernized E-File" ;
-  ea:belongsTo: ea:Intake ;
-  ea:hostedOn: ea:MeFServer ;
-  ea:isOwnedBy: ea:MeFOwningOrganization ;
-  ea:isPartOf: ea:CurrentArchitecturalView ;
-  ea:isPartOf: ea:RoadMapArchitecturalView ;
-  ea:isPartOf: ea:TargetArchitecturalView ;
-  ea:leverages: ea:CommonServicesA ;
-  ea:programmedIn: ea:MeFProgrammingLanguage ;
-  ea:receivesDataFrom: ea:ApplicationY ;
-  ea:savesDataIn: ea:MeFDatastore ; 
-  ea:sendsDataTo: ea:ApplicationZ ;
-  ea:supports: ea:1.0SubmissionReceiptandPreparation ;
-  ea:supports: ea:BP1.2PreSubmissionProcessing ;
+  rdfs:label "Generalized Mainline Framework (GMF)";
+.
+ea:ACAVerificationService
+  a ea:Application ;
+  rdfs:label "ACA Verification Service (AVS)";
+.
+ea:y7587568767576443
+  a ea:Person ;
+  rdfs:label "Bradley Sachar"
+. 
+ea:ModernizedEFile
+  a ea:Application ;
+  rdfs:label "Modernized E-File (Mef)" ;
+  ea:belongsTo ea:Intake ;
+  ea:hostedOn ea:MeFServer ;
+  ea:isOwnedBy ea:MeFOwningOrganization ;
+  ea:isPartOf ea:CurrentArchitecturalView ;
+  ea:isPartOf ea:RoadMapArchitecturalView ;
+  ea:isPartOf ea:TargetArchitecturalView ;
+  ea:leverages ea:CommonServicesA ;
+  ea:programmedIn ea:MeFProgrammingLanguage ;
+  ea:receivesDataFrom ea:ApplicationY ;
+  ea:savesDataIn ea:MeFDatastore ; 
+  ea:sendsDataTo ea:ApplicationZ ;
+  ea:supports ea:1.0SubmissionReceiptandPreparation ;
+  ea:supports ea:BP1.2PreSubmissionProcessing ;
+  ea:supports ea:Intake ;
   ea:utilizes ea:MeFOperatingSystem ;
   ea:willBeImpactedBy: ea:MeFTechnology ;
+  ea:hasDocument ea:ModernizedEFile.pdf ;
+  ea:hasDocument ea:MeF_Application_ABAextract.pdf ;
 .
 ea:1.0SubmissionReceiptandPreparation
   a ea:BusinessCapability  ;
-  rdfs:label "1.0 Submission Receiptand Preparation" ;
+  rdfs:label "1.0 Submission Receipt and Preparation" ;
+.
+ea:1.1OpenSortBatchandRouteAllPaperDocuments
+  a ea:BusinessCapability  ;
+  rdfs:label "1.1 Open, Sort, Batch, and Route All Paper Documents" ;
+.
+ea:1.2ScanAllTaxInformationContainedInPaperDocuments
+  a ea:BusinessCapability  ;
+  rdfs:label "1.2 Scan All Tax Information Contained In Paper Documents" ;
 .
 ea:ApplicationY
   a ea:Application ;
@@ -274,15 +336,32 @@ ea:ApplicationZ
 ea:BP1.2PreSubmissionProcessing
   a ea:BusinessProcess ;
   rdfs:label "BP 1.2 Pre-Submission Processing" ;
+  ea:isSupportedBy ea:ModernizedEFile ;
+  ea:isSupportedBy ea:ACAVerificationService ;
+  ea:belongsTo ea:SubmissionProcessing ;
 .
 ea:CommonServicesA
-  a ea:CommonServices;
+  a ea:CommonServices ;
   rdfs:label "Common Services A" ;
 .
 ea:Intake
-a ea:BusinessArea ;
+  a ea:BusinessArea ; 
   rdfs:label "Intake" ;
-  ea:isSupportedBy: ea:ModernizedEFile.pptx.xml ;
+  ea:isSupportedBy ea:ModernizedEFile ;
+  ea:isSupportedBy ea:GeneralizedMainlineFramework ;
+  ea:isSupportedBy ea:ACAVerificationService;
+  ea:supports ea:1.0SubmissionReceiptandPreparation ;
+  ea:supports ea:1.1OpenSortBatchandRouteAllPaperDocuments ;
+  ea:supports ea:1.2ScanAllTaxInformationContainedInPaperDocuments ;
+  ea:tracesTo ea:Ingestion ;
+  ea:tracesTo ea:Perfection ;
+  ea:tracesTo ea:Verification ;
+  ea:hasDocument ea:Intake_TransitionView_TechRoadmap.pdf ;
+  ea:hasDocument ea:Intake_BusinessArea_Kbextract.pdf ;
+.
+ea:Ingestion
+  a ea:BusinessService ;
+  rdfs:label "Ingestion" ;
 .
 ea:MeFDatastore
   a ea:Datastore ;
@@ -308,3 +387,65 @@ ea:MeFOwningOrganization
   a ea:Organization ;
   rdfs:label "MeF Owning Organization" ;
 .
+ea:Perfection
+  a ea:BusinessService ;
+  rdfs:label "Perfection" ;
+.
+ea:Verification
+  a ea:BusinessService ;
+  rdfs:label "Verification" ;
+.
+ea:ModernizedEFile.pptx.xml 
+  a ea:Document ;
+  ea:relatedTo ea:ModernizedEFile ;
+  rdfs:label "ModernizedEfile.pptx.xml" ;
+.
+ea:Intake_Business%20Area_Kbextract.docx.xml
+  a ea:Document ;
+  ea:relatedTo ea:Intake ;
+  ea:hasUrl "http://localhost:3000/v1/documents?uri=Intake_Transition%2520View_TechRoadmap.pdf" ;
+  rdfs:label "Intake_Business Area_Kbextract.docx" ;
+.
+ea:95292
+  a ea:Webservice ;
+  ea:hasUrl "https://github.com/marklogic/entity-services/blob/master/entity-services/src/main/xdmp/entity-services/entity-services.ttl" ;
+  ea:relatedTo ea:Intake ;  
+  rdfs:label "Github Link for Entity Services"
+.  
+ea:q3r32
+  a ea:Document ;
+  ea:hasUrl "http://github.com/marklogic" ;
+  ea:relatedTo ea:Intake ;
+  rdfs:label "GitHub link for mlcp" ;
+.  
+ea:Intake_Transition%20View_TechRoadmap.pptx.xml
+  a ea:Document ;
+  ea:relatedTo ea:Intake ;
+  rdfs:label "Intake_Transition View_TechRoadmap.pptx" ;
+.
+ea:MeF_Application_ABAextract.docx.xml
+  a ea:Document ;
+  ea:relatedTo ea:ModernizedEFile ;
+  rdfs:label "MeF_Application_ABAextract.docx" ;
+.
+ea:ModernizedEFile.pdf
+  a ea:Document ;
+  ea:relatedTo ea:ModernizedEFile ;
+  rdfs:label "ModernizedEFile.pdf" ;
+.
+ea:MeF_Application_ABAextract.pdf
+  a ea:Document ;
+  ea:relatedTo ea:ModernizedEFile ;
+  rdfs:label "MeF_Application_ABAextract.pdf" ;
+.
+ea:Intake_TransitionView_TechRoadmap.pdf
+  a ea:Document ;
+  ea:relatedTo ea:Intake ;
+  rdfs:label "Intake_Transition View_TechRoadmap.pdf" ;
+.
+ea:Intake_BusinessArea_Kbextract.pdf
+  a ea:Document ;
+  ea:relatedTo ea:Intake ;
+  rdfs:label "Intake_Business Area_Kbextract.pdf" ;
+.
+
