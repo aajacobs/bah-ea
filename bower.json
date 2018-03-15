@@ -28,7 +28,8 @@
     "vkbeautify": "*",
     "ml-highcharts-ng": "~0.0.11",
     "view-file-ng": "^0.1.1",
-    "ml-visjs-graph-ng": "^2.4.0"
+    "ml-visjs-graph-ng": "^2.4.0",
+    "angular-bootstrap-contextmenu": "^1.1.0"    
   },
   "overrides": {
     "angular-highlightjs": {
