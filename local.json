@@ -1,0 +1,14 @@
+{
+  "app-name": "bah-ea",
+  "ml-version": "9",
+  "ml-host": "localhost",
+  "ml-admin-user": "admin",
+  "ml-admin-pass": "boozallen",
+  "ml-app-user": "bah-ea-user",
+  "ml-app-pass": "VR'|)DYJ5V-Rd/=$&!wK",
+  "ml-http-port": "8040",
+  "node-port": "9040",
+  "guest-access": "false",
+  "disallow-updates": "false",
+  "appusers-only": "false"
+}

@@ -32,7 +32,7 @@ declare function bah:transform(
         <collection>data</collection>
       </collections>
       </options>)
-  return ()
+  return $content
 
 (: return (
    map:put($content, "value",

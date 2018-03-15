@@ -45,9 +45,11 @@ router.get('/user/status', function(req, res) {
       ));
     }
   } else {
-    var queryString = req.originalUrl.split('?')[1];
-    var path = req.baseUrl + req.path + (queryString ? '?' + queryString : '');
+    // var queryString = req.originalUrl.split('?')[1];
+    // var path = req.baseUrl + req.path + (queryString ? '?' + queryString : '');
     var passportUser = req.session.passport.user;
+    var path = '/v1/documents?uri=/api/users/' + passportUser.username + '.json';
+
     var reqOptions = {
       hostname: options.mlHost,
       port: options.mlHttpPort,
@@ -71,7 +73,8 @@ router.get('/user/status', function(req, res) {
         var profile = httpClient.get({
           hostname: options.mlHost,
           port: options.mlHttpPort,
-          path: '/v1/documents?uri=/api/users/' + passportUser.username + '.json',
+          // path: '/v1/documents?uri=/api/users/' + passportUser.username + '.json',
+          path: path,
           headers: headers,
           ca: ca
         }, function(response) {

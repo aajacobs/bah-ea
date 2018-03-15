@@ -36,6 +36,7 @@ declare function trans:transform(
         <collection>data</collection>
       </collections>
       </options>)
+
   return $content
 
 };
