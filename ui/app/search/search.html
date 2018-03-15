@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-md-12 search-row">
-    <ml-input qtext="$ctrl.qtext" search="$ctrl.search(qtext)" suggest="$ctrl.suggest(val)" template="fa" class="search"></ml-input>
+    <ml-input qtext="$ctrl.qtext" search="$ctrl.search(qtext)" suggest="$ctrl.suggestAdvanced(val)" template="fa" class="search"></ml-input>
   </div>
 </div>
 
@@ -10,15 +10,26 @@
   </div>
   <div class="col-xs-8 col-sm-9 col-md-10 results-col">
     <h4 ng-if="$ctrl.response.total === 0">No results to show</h4>
+    <div ng-if="$ctrl.isGraph" >
+      <ml-visjs-graph id="myGraph" 
+      class ="white-bg" 
+      uris="$ctrl.graphUris" 
+      graph-search="$ctrl.graphSearch"
+      graph-events="$ctrl.graphEvents"
+      network="$ctrl.network" />
+    </div>  
+    <div id="rightclickmenu" style="visibility:hidden;" context-menu="menuOptions"></div>
 
-    <div ng-if="$ctrl.response.total > 0" class="results">
+    <div ng-if="$ctrl.response.total > 0 && !$ctrl.isGraph" class="results">
       <div class="pagination-ctrls">
         <uib-pagination class="pagination-sm" ng-model="$ctrl.page" ng-change="$ctrl.search()" max-size="10" boundary-links="true" total-items="$ctrl.response.total" items-per-page="$ctrl.response['page-length']">
         </uib-pagination>
         <ml-snippet set-snippet="$ctrl.setSnippet(type)"></ml-snippet>
       </div>
+      <div>
       <ml-metrics search="$ctrl.response" ></ml-metrics>
-      <ml-results template="app/search/search-results.html" results="$ctrl.response.results"></ml-results>
+      <ml-results template="app/search/search-results.html" results="$ctrl.response.results"></ml-results></div>
+<!--       <h4> where is this? lksjdf;lj ;aslkjfd ;lksdj f;lkjwef; lkajs;dlfkj we;flkj ;alskjf w;lekfj ;alkwjef ;lkawj ef;lkjas ;flkjw e;flkjas ;dlfkjwe;flkj kldjf lkejf ;wlkf jldskj f;alksjdf;lskdjf ;wlekjf ;alskdjf ;laskjdf laksjd fwoeifjlskjd foiwjef oksj dfijwoefk jdoifj woijd fjoiwj foij wodijf oiwdjf oiwdjfowd jofijw</h4> -->
     </div>
   </div>
 </div>

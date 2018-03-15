@@ -65,6 +65,59 @@
       });
     }
 
+  //   var graphEvents = {
+  //     oncontext: function(params) {
+  //       var canvasLocation = document.getElementById('myGraph').getBoundingClientRect();
+  //       var pointerDOM = params.pointer.DOM;
+
+  //       var x = canvasLocation.x + pointerDOM.x;
+  //       var y = canvasLocation.y + pointerDOM.y;
+  //       var rightClickMenu = document.getElementById('rightclickmenu').style;
+
+  //       rightClickMenu.top = y + 'px';
+  //       rightClickMenu.left = x + 'px';
+  //       rightClickMenu.position = 'absolute';
+  //       rightClickMenu['z-index'] = 1;
+  //       ctrl.clickedNode = params.nodes[0];
+
+  //       var element = document.getElementById('rightclickmenu');
+  //   if (window.CustomEvent) {
+  //     var new_event = new params.event.constructor(params.event.type, params.event)
+  //     element.dispatchEvent(new_event);
+  //   } else if (document.createEvent) {
+  //       var ev = document.createEvent('HTMLEvents');
+  //       ev.initEvent('contextmenu', true, false);
+  //       element.dispatchEvent(ev);
+  //   } else { // Internet Explorer
+  //       element.fireEvent('oncontextmenu');
+  //   }
+
+  //       $scope.$apply();
+
+
+  //       return params.event.preventDefault();
+  //     }
+
+  //   };
+
+  // $scope.menuOptions = [
+  //     {
+  //         text: 'Center here',
+  //         click: function ($itemScope, $event, modelValue, text, $li) {
+  //           console.log('Clicked node: ' + ctrl.clickedNode);
+  //           console.log('Recenter the map.');
+  //         }
+  //     },
+  //     {
+  //         text: 'Find related files',
+  //         click: function ($itemScope, $event, modelValue, text, $li) {
+  //           console.log('Clicked node: ' + ctrl.clickedNode);
+  //           console.log('Put your service call to the related files here and populate the submenu');
+  //         }
+  //     }
+  //   ];
+
+
     angular.extend(ctrl, {
       doc : doc.data,
       uri : uri,
@@ -73,6 +126,7 @@
       viewUri: '/v1/documents?uri=' + encodedUri + '&format=binary&transform=sanitize',
       downloadUri: '/v1/documents?uri=' + encodedUri + '&format=binary&transform=download',
       delete: deleteDocument
+      // customEvents: graphEvents      
     });
   }
 }());

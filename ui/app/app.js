@@ -11,7 +11,8 @@
     'ml.visjsGraph',
 
     // top-level state
-    'app.root'
+    'app.root',
+    'ui.bootstrap.contextMenu'
   ]);
 
 }());

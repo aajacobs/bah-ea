@@ -26,9 +26,11 @@
       allow-modal="true" controls="true" download-uri="$ctrl.downloadUri"
       file-name="$ctrl.fileName" show-code="false" trust-uri="false">
     </view-file> 
-    <div >
+    <br />
+       <div>
        <div class="col-sm-1" />
-       <div class="col-sm-11 white-bg"><ml-visjs-graph class ="white-bg" uris="['http://lab.bah.com/ontologies/enterprisearchitecture/ea.owl#' + $ctrl.uri]" />/></div>
+       <div class="col-sm-11 white-bg">
+        <ml-visjs-graph class ="white-bg" uris="['http://lab.bah.com/ontologies/enterprisearchitecture/ea.owl#' + $ctrl.uri]" /></div>
     </div>
   </div>
   <div class="col-sm-3 right-col">
