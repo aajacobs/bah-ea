@@ -4,9 +4,22 @@
 
   <!-- Limit all searches to this additional query -->
   <additional-query>
-    <cts:collection-query xmlns:cts="http://marklogic.com/cts">
+<cts:and-query xmlns:cts="http://marklogic.com/cts">
+    <cts:collection-query>
       <cts:uri>data</cts:uri>
     </cts:collection-query>
+    <cts:or-query>
+        <cts:term-query>
+          <cts:key>2328177500544466626</cts:key>
+        </cts:term-query>
+        <cts:term-query>
+          <cts:key>12572403224569452887</cts:key>
+        </cts:term-query>
+        <cts:term-query>
+          <cts:key>1458993848217274698</cts:key>
+        </cts:term-query>
+    </cts:or-query>
+</cts:and-query>
   </additional-query>
 
   <!-- Full-text search options -->
@@ -137,6 +150,12 @@
     </range>
   </constraint>
 
+  <constraint name="p">
+    <range type="xs:string" facet="false" collation="http://marklogic.com/collation">
+      <element ns="http://www.w3.org/1999/xhtml" name="p"/>
+    </range>
+  </constraint>  
+
   <!-- Example geospatial facet based on the sample-data, used by map theme -->
   <constraint name="Location">
     <geo-elem-pair>
@@ -162,13 +181,19 @@
   -->
 
   <!-- example suggestion-source below -->
-  <!--
-  <suggestion-source ref="myconstraint">
+  
+<default-suggestion-source>
+  <range type="xs:string">
+    <element ns="http://www.w3.org/1999/xhtml" name="p"/>
+   </range>
+</default-suggestion-source> 
+<!--   
+  <suggestion-source ref="p">
     <suggestion-option>frequency-order</suggestion-option>
     <suggestion-option>descending</suggestion-option>
     <suggestion-option>limit=10</suggestion-option>
-  </suggestion-source>
-  -->
+  </suggestion-source> -->
+  
 
   <!-- This will extract the latitude and longitude from the search. -->
   <extract-document-data selected="include">
