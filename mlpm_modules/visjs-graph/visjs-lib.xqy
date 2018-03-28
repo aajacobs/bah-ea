@@ -14,7 +14,7 @@ declare function visjs:get-instances($type) {
             PREFIX bah: <http://lab.bah.com/ontologies/enterprisearchitecture/ea.owl#>
             PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 
-              select ?label $uri where {
+              select ?label ?uri where {
               ?uri a ?type ; 
               rdfs:label ?label .
             }
@@ -57,10 +57,14 @@ declare function visjs:build-graph(
         }
   }
   :)
-  let $edge-triples := sem:sparql(
-    concat("
+  let $_ := xdmp:log("here comes the type:")
+  let $type := ($subject-iris ! visjs:get-types(.)//*:object/string())[1] = "http://www.w3.org/2002/07/owl#Class"
+  let $_ := xdmp:log($type)
+  let $edge-q := 
+  concat("
       PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
       PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+      PREFIX owl: <http://www.w3.org/2002/07/owl#>
       SELECT DISTINCT
         ?subject
         (COALESCE(?predicateLabel, ?predicateUri) AS ?predicate)
@@ -69,26 +73,29 @@ declare function visjs:build-graph(
       WHERE {
         {
           ?subject ?predicateUri ?object .
-          FILTER( ?subject = ?subjects )
-        } UNION {
-          ?subject ?predicateUri ?object
-          FILTER( ?object = ?revSubjects )
-        }
-        {
-          ?s ?p ?subject
-        }
+          FILTER( ?subject = ?subjects || ?object = ?revSubjects)
+        } 
+        ", visjs:get-union($type), "
         OPTIONAL {
           ?predicateUri rdfs:label ?predicateLabel .
         }
-        ", visjs:sparql-filter($show-instances), "
+        ", visjs:sparql-filter($show-instances, $subject-iris), "
         FILTER( isUri( ?object ) )
       }
-    "),
+    ")
+  let $_ := xdmp:log($edge-q)
+  let $_ := xdmp:log("show-instances:" || $show-instances)
+
+  let $edge-triples := sem:sparql($edge-q,
     map:new((
       map:entry("subjects", $subject-iris),
       map:entry("revSubjects", $subject-iris)
     ))
   )
+  let $_ := xdmp:log("EDGE TRIPLES")
+
+  let $_ := xdmp:log($edge-triples)
+
   let $node-uris := distinct-values((
     $edge-triples ! map:get(., "subject"),
     $edge-triples ! map:get(., "object")
@@ -100,6 +107,7 @@ declare function visjs:build-graph(
       concat("
         PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
         PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+        PREFIX owl: <http://www.w3.org/2002/07/owl#>
         SELECT DISTINCT
           (COALESCE(?subjectLabel, ?subject) AS ?label)
           (COALESCE(?subjectType, 'unknown') AS ?type)
@@ -123,7 +131,7 @@ declare function visjs:build-graph(
     let $_ := xdmp:log($node-uri)
     let $_ := xdmp:log("NODE_DaTA")
     let $_ := xdmp:log($node-data)
-    where (($node-uri ne "http://www.w3.org/2002/07/owl#Class" and $node-uri ne "http://www.w3.org/2002/07/owl#Thing"))
+    where (($node-uri ne "http://www.w3.org/2002/07/owl#Class" and $node-uri ne "http://www.w3.org/2002/07/owl#Thing" and $node-uri ne "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property" and $node-uri ne "http://www.w3.org/2002/07/owl#ObjectProperty" ))
     
     return xdmp:to-json(map:new((
       map:entry("id", $node-uri),
@@ -163,6 +171,22 @@ declare function visjs:build-graph(
 
 };
 
+declare function visjs:get-union($type) {
+  if ($type) then 
+    "UNION {
+            ?subject ^rdfs:domain ?predicateUri .
+            ?predicateUri rdfs:range ?object .
+          }
+     "
+  else    
+    "UNION {
+          ?subject ?predicateUri ?object
+          FILTER( ?object = ?revSubjects )
+        }
+    "
+
+};
+
 declare function visjs:get-types($subjects as xs:string*) as node()*
 {
   <x>{cts:triples($subjects ! sem:iri(.), sem:iri("http://www.w3.org/1999/02/22-rdf-syntax-ns#type"))}</x>/*
@@ -186,17 +210,29 @@ declare private function visjs:get-label($subject as xs:string) as xs:string
 
 declare private function visjs:sparql-filter() as xs:string
 {
-  visjs:sparql-filter(false())
+  visjs:sparql-filter(false(), "")
 };
 
+declare private function visjs:sparql-filter($subject-iris) as xs:string
+{
+  visjs:sparql-filter(false(), $subject-iris)
+};
+
+
 declare private function visjs:sparql-filter(
-  $show-instances as xs:boolean
+  $show-instances as xs:boolean,
+  $subject-iris
 ) as xs:string
 {
+
+  let $type := ($subject-iris ! visjs:get-types(.)//*:object/string())[1] = "http://www.w3.org/2002/07/owl#Class"
+  return
   if ($show-instances) then
-    " FILTER( ?predicateUri = rdf:type ) "
+    (:" FILTER( ?predicateUri = rdf:type ) ":)
+    " FILTER( ?predicateUri = rdf:type  ) "
+
   else
-    " FILTER( !( ?predicateUri = (rdfs:label, rdf:type) ) ) "
+    " FILTER( !( ?predicateUri = (rdfs:label, rdf:type, rdfs:domain, rdfs:range) ) ) "
 };
 
 declare private function visjs:get-edge-count($subject) as xs:int
@@ -211,7 +247,7 @@ declare private function visjs:get-edge-count($subject) as xs:int
     WHERE {
       {
         ?subject ?predicateUri ?object . ",
-    visjs:sparql-filter(),
+        visjs:sparql-filter(),
     "
       }
       UNION
