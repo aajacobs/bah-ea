@@ -177,7 +177,7 @@
                 "children": [
                   {
                     "text": "Filesystem: Intake Business Area Extract",
-                    "click": function() {$window.open("http://localhost:3000/v1/documents?uri=Intake_TransitionView_TechRoadmap.pdf", '_blank')}
+                    "click": function() {$window.open("http://52.41.245.255:3000/v1/documents?uri=Intake_TransitionView_TechRoadmap.pdf", '_blank')}
                   },
                   {
                     "text": "Webservice link to github",
@@ -185,7 +185,7 @@
                   },
                   {
                     "text": "Sharepoint: Intake Transition View Tech Roadmap",
-                    "click": function() {$window.open("http://localhost:3000/v1/documents?uri=Intake_TransitionView_TechRoadmap.pdf", '_blank')}
+                    "click": function() {$window.open("http://52.41.245.255:3000/v1/documents?uri=Intake_TransitionView_TechRoadmap.pdf", '_blank')}
                   }                                    
 
                 ]
